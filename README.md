@@ -40,9 +40,12 @@ Las variables principales contenidas en la base de datos son las siguientes:
 #### **Estructura de los Datos**
 Cada registro contiene las siguientes columnas:
 
-| **Nombre**           | **Fecha**    | **Temp Max** | **Temp Min** | **Temp Prom** | **Sensación Térmica Max** | **Sensación Térmica Min** | **Sensación Térmica** | **Punto de Rocío** | **Humedad** | **Precipitación** | **Probabilidad de Precipitación** | **Cobertura de Precipitación** | **Tipo de Precipitación** | **Nieve** | **Profundidad de Nieve** | **Ráfagas de Viento** | **Velocidad del Viento** | **Dirección del Viento** | **Presión a Nivel del Mar** | **Cobertura Nublada** | **Visibilidad** | **Radiación Solar** | **Energía Solar** | **Índice UV** | **Riesgo de Fenómenos Severos** | **Amanecer**          | **Atardecer**         | **Fase Lunar** | **Condiciones**      | **Descripción del Clima**  | **Icono**       | **Estaciones** |
-|----------------------|--------------|--------------|--------------|---------------|---------------------------|---------------------------|----------------------|--------------------|-------------|-------------------|--------------------------------|------------------------------|---------------------------|-----------|--------------------------|----------------------|-------------------------|-------------------------|--------------------------|----------------------|----------------|-------------------|---------------------|---------------|------------------------|--------------------|-------------------|---------------|----------------------|----------------------------|-----------------|-----------------|
-| Ciudad de Oaxaca     | 01/06/2000   | 27.4         | 20.2         | 24.1          | 27.2                      | 20.2                      | 24.1                 | 13.6               | 52.6        |                   | 0                              | 0                            |                           |           |                          | 7.2                  | 54.3                    | 66                      | 17.6               | 0.97              | Parcialmente Nublado  | Parcialmente nublado durante el día. | partly-cloudy-day | 7.6773E+10  |
+
+| datetime   | name             | tempmax | tempmin | temp | feelslikemax | feelslikemin | feelslike | dew  | humidity | precip | precipprob | precipcover | preciptype | snow | snowdepth | windgust | windspeed | winddir | sealevelpressure | cloudcover | visibility | solarradiation | solarenergy | uvindex | severerisk | sunrise             | sunset              | moonphase | conditions       | description                       | icon              | stations   |
+| ---------- | ---------------- | ------- | ------- | ---- | ------------ | ------------ | --------- | ---- | -------- | ------ | ---------- | ----------- | ---------- | ---- | --------- | -------- | --------- | ------- | ---------------- | ---------- | ---------- | -------------- | ----------- | ------- | ---------- | ------------------- | ------------------- | --------- | ---------------- | --------------------------------- | ----------------- | ---------- |
+| 01/06/2000 | Ciudad de Oaxaca | 27.4    | 20.2    | 24.1 | 27.2         | 20.2         | 24.1      | 13.6 | 52.6     |        | 0          | 0           | rain       |      |           |          | 7.2       | 54.3    |                  | 66         | 17.6       |                |             |         |            | 2000-06-01T06:55:51 | 2000-06-01T20:01:35 | 0.97      | Partially cloudy | Partly cloudy throughout the day. | partly-cloudy-day | 7.6773E+10 |
+| 02/06/2000 | Ciudad de Oaxaca | 28.7    | 16.1    | 21.8 | 27.7         | 16.1         | 21.5      | 12.9 | 62.1     |        | 0          | 0           | rain       |      |           |          | 7.2       | 45      |                  | 46.7       | 15         |                |             |         |            | 2000-06-02T06:55:49 | 2000-06-02T20:01:56 | 0         | Partially cloudy | Partly cloudy throughout the day. | partly-cloudy-day | 7.6773E+10 |
+
 
 #### **Consideraciones**
 - La base de datos abarca una amplia gama de parámetros climáticos que permiten un análisis detallado de las condiciones meteorológicas a lo largo del tiempo en Oaxaca.
@@ -253,40 +256,41 @@ La estructura del `.csv` ahora después de la imputación es la siguiente (conti
 | 01/06/2010 | 36.2    | 14.9    | 54.8     | 0      | 22        | 1008.8           | 25.1       | 344.2          |
 | 02/06/2010 | 35.1    | 14.7    | 46.4     | 0      | 22.3      | 1005.4           | 26.9       | 338            |
 
-Sí, el código está **correcto**. Aquí te explico cómo está funcionando cada parte y por qué está bien estructurado:
+```
+Aquí tienes el algoritmo reescrito en pseudocódigo, de forma clara y estructurada:
 
-1. **Carga y preparación de los datos**:
-   - Se cargan los datos desde el archivo CSV.
-   - Se seleccionan las columnas relevantes para la predicción (`'tempmax'`, `'tempmin'`, `'humidity'`, `'cloudcover'`, `'sealevelpressure'`, `'windspeed'`, `'solarradiation'`, `'precip'`).
-   - Se eliminan las filas con valores faltantes usando `.dropna()`.
-   - Se imputan los valores faltantes con la media de cada columna usando `SimpleImputer`.
+---
 
-2. **División de variables**:
-   - Se separan las variables predictoras (independientes) `X` y la variable dependiente `y` (`'precip'`).
-   - Se elimina `'precip'` de `X` porque es la variable que el modelo intentará predecir.
+**Algoritmo para Regresión Lineal Múltiple**
 
-3. **División del conjunto de datos**:
-   - Se divide el conjunto de datos en entrenamiento (80%) y prueba (20%) usando `train_test_split`.
+1. **Definir función** `RegresionLinealMultiple(MinTemp, MaxTemp, CC, VP, Y)`
 
-4. **Modelo de regresión lineal**:
-   - Se crea el modelo `LinearRegression()`.
-   - Se entrena el modelo con los datos de entrenamiento (`X_train`, `y_train`).
-   - Se hacen predicciones sobre los datos de prueba (`X_test`), y se almacena el resultado en `y_pred`.
+2. **Recolectar datos** y guardarlos en un archivo Excel o CSV (`sample.xls`).
 
-5. **Cálculo de métricas de desempeño**:
-   - Se calcula el **Error Cuadrático Medio (MSE)** y la **Raíz del Error Cuadrático Medio (RMSE)** para medir el rendimiento del modelo.
-   - Se imprime el **coeficiente de determinación R²** para ver qué tan bien el modelo se ajusta a los datos.
+3. **Leer los datos** desde el archivo `sample.xls`:
+   - Abrir archivo de datos `f1 = "D:\\sample.xls"`
+   - Asignar cada columna de datos a las variables correspondientes:
+     - `CC[j] = columna "CC"`
+     - `VP[j] = columna "VP"`
+     - ... (similarly para otras variables)
 
-6. **Gráficos**:
-   - Se genera un gráfico de dispersión donde se compara **los valores reales de precipitación (`y_test`)** con las **predicciones (`y_pred`)**.
-     - La línea roja en el gráfico es la línea de perfecta predicción (cuando la predicción es igual al valor real).
-   - Se genera un histograma para visualizar la distribución de los errores (la diferencia entre la predicción y la realidad).
+4. **Calcular la matriz de correlación** para todas las variables.
 
-### Mejoras adicionales:
+5. **Formar la ecuación de regresión** usando las variables independientes (`MinTemp`, `MaxTemp`, `CC`, `VP`).
 
-Si buscas afinar aún más el modelo, podrías considerar:
+6. **Obtener los coeficientes y el término constante** de la ecuación de regresión a partir de los datos.
 
-- **Validación cruzada**: Para evaluar el rendimiento del modelo en diferentes subconjuntos de los datos.
-- **Normalización o estandarización de datos**: Si las variables tienen escalas muy diferentes, podría mejorar el rendimiento del modelo.
+7. **Calcular los valores predichos** (`Y_pred`) usando la ecuación de regresión y el conjunto de datos.
 
-Pero para el caso actual, el flujo del código y la metodología para entrenar y evaluar el modelo están correctamente implementados.
+8. **Calcular el Error Cuadrático Medio (RMSE)** para evaluar la precisión del modelo:
+   - `RMSE = raiz(media((Y_real - Y_pred)^2))`
+
+9. **Calcular la precisión** del modelo usando una métrica de evaluación apropiada (para regresión, se usa comúnmente `R^2` en lugar de una matriz de confusión).
+
+10. **Retornar** `RMSE` y `R^2` como métricas de evaluación del modelo.
+
+---
+
+Este pseudocódigo te da una visión general de cada paso para construir y evaluar un modelo de regresión lineal múltiple. La matriz de confusión no aplica aquí porque es un modelo de regresión, no de clasificación.
+
+```
