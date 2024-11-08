@@ -4,11 +4,11 @@ from sklearn.metrics import mean_squared_error, r2_score
 from math import sqrt
 
 # Paso 1: Leer los datos desde un archivo CSV
-data = pd.read_csv('Datos_Clima_Imputados.csv') 
+data = pd.read_csv('DS-Datos_Climaticos_Imputados.csv') 
 
 # Paso 2: Seleccionar las variables independientes y la variable dependiente
-# Cambia los nombres de las columnas según tu archivo
-X = data[['tempmin', 'tempmax', 'cloudcover', 'windspeed']]  # Variables independientes
+# Incluimos más variables que podrían mejorar la predicción de la precipitación
+X = data[['tempmin', 'tempmax', 'cloudcover', 'windspeed', 'humidity', 'sealevelpressure', 'solarradiation']]
 y = data['precip']  # Variable dependiente (precipitación en este caso)
 
 # Paso 3: Crear el modelo de regresión lineal múltiple y ajustarlo a los datos

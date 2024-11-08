@@ -4,10 +4,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Cargar los datos
-df = pd.read_csv('Datos_Clima_Imputados.csv')
+df = pd.read_csv('DS-Datos_Climaticos_Imputados.csv')
 
 # Seleccionar las columnas relevantes
 # Variables predictoras (independientes)
@@ -37,6 +36,9 @@ print("Coeficiente de determinación (R^2):", r2)
 # Mostrar los coeficientes del modelo
 print("Coeficientes del modelo:", model.coef_)
 print("Intercepto del modelo:", model.intercept_)
+
+# Importar las bibliotecas necesarias
+import matplotlib.pyplot as plt
 
 # Generar la gráfica de valores reales vs predichos
 plt.figure(figsize=(10, 6))

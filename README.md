@@ -2,6 +2,8 @@
 
 ## **Descripción de la Base de Datos de Clima - Oaxaca, México**
 
+`DC-Ciudad_de_Oaxaca_Combianado.csv` y `DS-Ciudad_de_Oaxaca_Combianado.csv`
+
 Esta base de datos proporciona información detallada sobre las condiciones climáticas en Oaxaca, Oaxaca, México, abarcando un rango de fechas desde el 1 de junio de 2010 hasta el 31 de junio de 2024. Los datos se recogen en unidades métricas (temperatura en grados Celsius, precipitación en milímetros, velocidad del viento en kilómetros por hora, etc.), y las coordenadas geográficas de la estación son latitud 17.0617 y longitud -96.7261.
 
 #### **Descripción de las Variables**
@@ -55,6 +57,8 @@ Cada registro contiene las siguientes columnas:
 
 # Imputación de Datos
 
+En `DS-script_imputar_datos.py`
+
 **Imputación por Interpolación**:
 - **Descripción**: Rellena los valores faltantes utilizando los valores adyacentes (ej. lineal o polinómico).
 - **Ventajas**: Capta la tendencia de los datos a lo largo del tiempo.
@@ -62,6 +66,8 @@ Cada registro contiene las siguientes columnas:
 - **Uso sugerido**: Cuando los datos tienen una secuencia temporal clara, como en nuestro caso.
 
 Dado que los datos son de series temporales (días en junio de 2010 a 2014) y variables como temperatura, humedad y presión atmosférica, la **imputación por interpolación** sería una opción muy adecuada. Esto te permitiría capturar la tendencia de los datos a lo largo del tiempo y aprovechar la relación natural que tienen estos datos.
+
+En `DC-imputar` se uso imputación para variables numéricas mediante interpolación temporal.
 
 # Diseño Conceptual
 
@@ -247,19 +253,20 @@ Donde:
 #### Variable Dependiente:
 - **precip**: Precipitación (la variable que queremos predecir)
 
+Ahora se modifica el archivo `.csv` para `DS-Datos_Climaticos_Seleccionados.csv` eliminando las columnas que no nos sean relevantes.
+
 # Script
 
-La estructura del `.csv` ahora después de la imputación es la siguiente (contiene datos del mes de junio desde 2010 al 2024), se cambio el nombre a `Datos_Clima_Imputados.csv`
+## Estructura
+La estructura del `DS-Datos_Climaticos_Imputados.csv` ahora después de la imputación es la siguiente (contiene datos del mes de junio desde 2010 al 2024).
 
 | datetime   | tempmax | tempmin | humidity | precip | windspeed | sealevelpressure | cloudcover | solarradiation |
 | ---------- | ------- | ------- | -------- | ------ | --------- | ---------------- | ---------- | -------------- |
 | 01/06/2010 | 36.2    | 14.9    | 54.8     | 0      | 22        | 1008.8           | 25.1       | 344.2          |
 | 02/06/2010 | 35.1    | 14.7    | 46.4     | 0      | 22.3      | 1005.4           | 26.9       | 338            |
 
-```
-Aquí tienes el algoritmo reescrito en pseudocódigo, de forma clara y estructurada:
 
----
+## Algoritmo 
 
 **Algoritmo para Regresión Lineal Múltiple**
 
@@ -289,8 +296,24 @@ Aquí tienes el algoritmo reescrito en pseudocódigo, de forma clara y estructur
 
 10. **Retornar** `RMSE` y `R^2` como métricas de evaluación del modelo.
 
----
+## Scripts y Efectividad en R^2
 
-Este pseudocódigo te da una visión general de cada paso para construir y evaluar un modelo de regresión lineal múltiple. La matriz de confusión no aplica aquí porque es un modelo de regresión, no de clasificación.
+### Siguiendo el modelo
 
-```
+$R^{2}=0.23740169830949498$
+- `DS-precip-prob-1.py`
+- `DS-precip-prob-2.py`
+
+$R^{2}=0.34650649819782275$
+- `DS-precip-prob-3.py`
+
+### Usando todos los datos disponibles 
+Usando todos los datos disponibles y los archivos `DC-*`
+
+En este caso no se seleccionaron y eliminaron columnas, en su lugar se usan todos los datos, y se aplica una imputación a todos los datos numéricos, estos mismos se usan para la regresión lineal múltiple.
+
+Se usan los datos originales de `DC-Datos-Climaticos-Originales.csv` se imputan con el script `DC-imputar` y se realiza el cálculo con...
+
+$R^{2}=0.5160296109266103$
+
+- `DC-precip-prob.py`

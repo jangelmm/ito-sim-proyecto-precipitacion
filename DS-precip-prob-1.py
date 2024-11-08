@@ -8,7 +8,7 @@ import seaborn as sns
 from sklearn.impute import SimpleImputer
 
 # Cargar los datos desde un archivo CSV
-df = pd.read_csv('Datos_Clima_Imputados.csv')
+df = pd.read_csv('DS-Datos_Climaticos_Imputados.csv')
 
 # Seleccionar las columnas relevantes para la predicción de la precipitación
 columns = ['tempmax', 'tempmin', 'humidity', 'cloudcover', 'sealevelpressure', 'windspeed', 'solarradiation', 'precip']
