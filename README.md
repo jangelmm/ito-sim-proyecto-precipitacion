@@ -300,32 +300,6 @@ La estructura del `DS-Datos_Climaticos_Imputados.csv` ahora después de la imput
 
 ### Siguiendo el modelo
 
-$R^{2}=0.23740169830949498$
-- `DS-precip-prob-1.py`
-- `DS-precip-prob-2.py`
+Calculamos los datos promedios con el script `DS-script-promedio.py` a `DS-Datos_Climaticos_Promedios.csv`
 
-$R^{2}=0.34650649819782275$
-- `DS-precip-prob-3.py`
-
-### Usando todos los datos disponibles 
-Usando todos los datos disponibles y los archivos `DC-*`
-
-En este caso no se seleccionaron y eliminaron columnas, en su lugar se usan todos los datos, y se aplica una imputación a todos los datos numéricos, estos mismos se usan para la regresión lineal múltiple.
-
-Se usan los datos originales de `DC-Datos-Climaticos-Originales.csv` se imputan con el script `DC-imputar` y se realiza el cálculo con...
-
-$R^{2}=0.5160296109266103$
-
-- `DC-precip-prob.py`
-
-## Notas
-- Análisis espectral de Fourier: *Analisis espectral del clima*
-- Varianza
-- Desvición estándar
-- Como interpretar los datos.
-- Investigar como le hacen los predictores del clima.
-
-
-- Quitar de 2024, y usar el 2024 para comparar los resultados, para comparar contra los reales.
-
-Entrenar del 2010 al 2023 y comparar con los del 2024.
+Ahora con los datos crear el modelo.
