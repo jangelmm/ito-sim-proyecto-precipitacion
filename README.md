@@ -317,3 +317,15 @@ Se usan los datos originales de `DC-Datos-Climaticos-Originales.csv` se imputan 
 $R^{2}=0.5160296109266103$
 
 - `DC-precip-prob.py`
+
+## Notas
+- Análisis espectral de Fourier: *Analisis espectral del clima*
+- Varianza
+- Desvición estándar
+- Como interpretar los datos.
+- Investigar como le hacen los predictores del clima.
+
+
+- Quitar de 2024, y usar el 2024 para comparar los resultados, para comparar contra los reales.
+
+Entrenar del 2010 al 2023 y comparar con los del 2024.
