@@ -4,13 +4,13 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 from math import sqrt
 
-# Paso 1: Leer los datos desde el archivo CSV actualizado
+# Paso 1: Leer los datos desde el archivo CSV
 data = pd.read_csv('DS-Datos_Climaticos_Promedios.csv')
 
 # Paso 2: Seleccionar las variables independientes (para MLR) y la variable dependiente
-# Vamos a predecir 'tempmax' usando otras variables como predictores
-X_mlr = data[['tempmin', 'humidity', 'precip', 'windspeed', 'sealevelpressure', 'cloudcover', 'solarradiation']]
-y = data['tempmax']
+# Vamos a predecir 'precip' usando otras variables como predictores
+X_mlr = data[['tempmin', 'humidity', 'windspeed', 'sealevelpressure', 'cloudcover', 'solarradiation']]
+y = data['precip']
 
 # Crear un modelo de regresión lineal múltiple (MLR)
 mlr_model = LinearRegression()
@@ -26,8 +26,8 @@ print(f"MLR - RMSE: {rmse_mlr}")
 print(f"MLR - R^2: {r2_mlr}")
 
 # Crear un modelo de regresión lineal simple (SLR)
-# Usaremos 'tempmin' como única variable predictora para el modelo SLR
-X_slr = data[['tempmin']]  # Convertimos a DataFrame para compatibilidad
+# Usaremos 'humidity' como única variable predictora para el modelo SLR
+X_slr = data[['humidity']]  # Convertimos a DataFrame para compatibilidad
 slr_model = LinearRegression()
 slr_model.fit(X_slr, y)
 
@@ -42,14 +42,14 @@ print(f"SLR - R^2: {r2_slr}")
 
 # Paso 3: Graficar los resultados
 plt.figure(figsize=(10, 6))
-plt.plot(data['year'], y, label='Actual', marker='o', color='blue')
-plt.plot(data['year'], y_pred_mlr, label='MLR', marker='^', color='green')
-plt.plot(data['year'], y_pred_slr, label='SLR', marker='*', color='cyan')
+plt.plot(data['year'], y, label='Actual Precipitation', marker='o', color='blue')
+plt.plot(data['year'], y_pred_mlr, label='MLR Prediction', marker='^', color='green')
+plt.plot(data['year'], y_pred_slr, label='SLR Prediction', marker='*', color='cyan')
 
 # Configurar etiquetas y título
 plt.xlabel('Year')
-plt.ylabel('Max Temperature (°C)')
-plt.title('Comparison of Actual vs MLR and SLR Predictions')
+plt.ylabel('Precipitation (mm)')
+plt.title('Comparison of Actual vs MLR and SLR Predictions for Precipitation')
 plt.xticks(rotation=45)
 plt.legend()
 plt.grid(True)
