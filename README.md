@@ -310,7 +310,7 @@ Ahora con los datos crear el modelo.
 El programa utiliza el modelo **ARIMA** (AutoRegressive Integrated Moving Average), un método ampliamente reconocido para la modelización y proyección de series temporales. 
 
 1. **Selección automática de parámetros:**  
-   El modelo emplea la función `auto_arima` para identificar automáticamente los mejores parámetros (p, d, q) y, en caso de patrones estacionales, también los parámetros adicionales (P, D, Q, m). Esto minimiza el riesgo de sesgo en la configuración del modelo.
+   El modelo emplea la función `auto_arima` para identificar automáticamente los mejores parámetros, lo que minimiza el riesgo de sesgo en la configuración del modelo.
    
 2. **Entrenamiento del modelo:**  
    Una vez determinados los parámetros óptimos, se ajusta el modelo utilizando los datos históricos de cada variable independiente.
@@ -321,6 +321,4 @@ El programa utiliza el modelo **ARIMA** (AutoRegressive Integrated Moving Averag
 4. **Incorporación de ruido:**  
    Para simular variaciones reales, se agrega un ruido estadístico controlado a las proyecciones. Este ruido sigue una distribución normal con media cero y una desviación estándar basada en las predicciones iniciales.
 
-## Salida:
-- Un archivo CSV con las proyecciones completas para todas las variables, incluyendo los años proyectados (2025-2030).
-- Un archivo CSV que incluye únicamente las proyecciones para 2025-2030, excluyendo la columna `precip`.
+
